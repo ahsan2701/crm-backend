@@ -15,7 +15,9 @@ const getContacts = async (req, res, next) => {
   let contacts = [];
   for (let index = 0; index < customer.contacts.length; index++) {
     const contactCustomer = await Customer.findById(customer.contacts[index]);
-    contacts.push(contactCustomer);
+    if (contactCustomer) {
+      contacts.push(contactCustomer);
+    }
   }
 
   return res.status(200).json({ contacts });
